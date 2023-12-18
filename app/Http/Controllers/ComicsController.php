@@ -13,54 +13,55 @@ class ComicsController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comics::all();
+        return view('comics.index', compact('comics'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreComicsRequest $request)
-    {
-        //
-    }
+    // public function store(StoreComicsRequest $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
      */
-    public function show(Comics $comics)
+    public function show($id)
     {
-        //
+        $comic = Comics::fetch($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comics $comics)
-    {
-        //
-    }
+    // public function edit(Comics $comics)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateComicsRequest $request, Comics $comics)
-    {
-        //
-    }
+    // public function update(UpdateComicsRequest $request, Comics $comics)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comics $comics)
-    {
-        //
-    }
+    // public function destroy(Comics $comics)
+    // {
+    //     //
+    // }
 }
