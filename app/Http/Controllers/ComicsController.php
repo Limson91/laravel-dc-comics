@@ -67,10 +67,21 @@ class ComicsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(UpdateComicsRequest $request, Comics $comics)
-    // {
-    //     //
-    // }
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            "title"=>"required|max:100",
+            "description"=>"nullable|max:10000",
+            "thumb"=> ["required", "url", "min:3", "max:225"],
+            "price"=>"required|decimale|min:1|max:70",
+            "sale:date"=>"required!date|max:70",
+            "type"=>"required|min:1|max:70"
+        ]);
+
+        $comic=Comic::findOrFail($id);
+        $comic->update($data);
+        return redirect()->route('comics.show', $comic->id);
+    }
 
     /**
      * Remove the specified resource from storage.
