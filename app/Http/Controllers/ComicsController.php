@@ -30,7 +30,21 @@ class ComicsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $data = $request->validate(
+            [
+                "title"=>"required|max:100",
+                "description"=>"nullable|max:10000",
+                "thumb"=>"required|min:3|max:225",
+                "price"=>"requied|decimal|min:1|max:50",
+                "series"=>"required|min:1|max:70",
+                "type"=>"required|min:1|max:70"
+            ],
+        );
+
+        $comic=Comic::create($data);
+        return redirect()->route("comics.show", $comic->id);
     }
 
     /**
@@ -38,16 +52,17 @@ class ComicsController extends Controller
      */
     public function show($id)
     {
-        $comic = Comics::fetch($id);
+        $comic = Comics::FindOrFail($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Comics $comics)
-    // {
-    //     //
-    // }
+    public function edit($id)
+    {
+        $comic=Comic::FindOrFail($id);
+        return view("comics.edit", compact("comic"));
+    }
 
     /**
      * Update the specified resource in storage.
