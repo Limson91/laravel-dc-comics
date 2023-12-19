@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comics extends Model
 {
-    protected $comicsData = [
+    protected $fillable = [
         "title",
         "description",
         "thumb",
